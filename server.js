@@ -2,6 +2,7 @@
 const express = require('express');
 const { db } = require('./db/db');
 const path = require('path');
+const fs = require('fs');
 
 //server instatiation
 const app = express();
@@ -23,9 +24,22 @@ app.get('/', (req, res) => {
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
+app.get('api/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './db/db.json'));
+});
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
+app.post('/api/notes', (req, res) => {
+    let note = req.body;
+    let noteArray = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    let arrayLength = (noteArray.length).toString();
+    note.id = arrayLength;
+    noteArray.push(note);
+    fs.writeFileSync('./db/db.json', JSON.stringify(noteArray));
+    res.json(noteArray);
+});
+
 
 app.get('/api/db', (req, res) => {
     res.send('IF YOU SEE THIS, YOUR SERVER AND ROUTE WORKS!')
