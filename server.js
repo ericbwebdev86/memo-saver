@@ -1,10 +1,12 @@
 //imports
 const express = require('express');
-const { db } = require('./db/db');
+const db = require('./db/db.json');
 const path = require('path');
 const fs = require('fs');
 
-//server instatiation
+let noteArray = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+
+//server instantiation
 const app = express();
 
 //PORT variable for local and Heroku use
@@ -18,34 +20,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-app.get('api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './db/db.json'));
-});
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+app.get('/api/notes', (req, res) => {
+    res.json(db);
 });
 app.post('/api/notes', (req, res) => {
     let note = req.body;
-    let noteArray = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
     let arrayLength = (noteArray.length).toString();
     note.id = arrayLength;
     noteArray.push(note);
     fs.writeFileSync('./db/db.json', JSON.stringify(noteArray));
     res.json(noteArray);
 });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 
-app.get('/api/db', (req, res) => {
-    res.send('IF YOU SEE THIS, YOUR SERVER AND ROUTE WORKS!')
-    // res.json(db);
-})
-//route for index
+
 
 
 
