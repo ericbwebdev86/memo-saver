@@ -23,7 +23,7 @@ app.use(express.json());
 
 //routes
 app.get('/api/notes', (req, res) => {
-    res.json(db);
+    res.json(noteArray);
 });
 app.post('/api/notes', (req, res) => {
     let note = req.body;
