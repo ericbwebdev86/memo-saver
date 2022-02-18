@@ -50,7 +50,6 @@ app.get('*', (req, res) => {
 
 //set app to listen at this port
 
-
 app.listen(PORT, () => {
     console.log(`API server running at http://localhost:${PORT}/`);
 })
