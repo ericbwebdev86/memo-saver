@@ -4,6 +4,8 @@ const db = require('./db/db.json');
 const path = require('path');
 const fs = require('fs');
 
+
+
 let noteArray = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
 
 //server instantiation
