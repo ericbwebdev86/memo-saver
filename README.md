@@ -3,17 +3,24 @@
 
   ## Table of Contents
   1. [Description](#description)
-  2. [Installation](#installation)
-  3. [Usage](#usage)
-  4. [Credits](#credits)
-  5. [Test](#test)
-  6. [Contact](#contact)
-  7. [License](#license)
+  2. [Tech used](#Tech-used)
+  3. [Installation](#installation)
+  4. [Usage](#usage)
+  5. [Credits](#credits)
+  6. [Test](#test)
+  7. [Contact](#contact)
+  8. [License](#license)
   
 
   ## Description
-  This is a simple note taking app using ExpressJS and NodeJS to serve a front end and route requests from/to a JSON file. 
-
+  This is a simple note taking app. 
+  
+  ## Tech Used
+  * html
+  * css
+  * javascript
+  * nodejs
+  * expressjs
 
   ## Installation
   Clone the code from https://github.com/ericbwebdev86/memo-saver and run npm install to download the dependencies.
